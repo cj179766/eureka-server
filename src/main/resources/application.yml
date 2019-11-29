@@ -1,0 +1,29 @@
+server:
+  port: 8761  #修改tomcat的运行端口,说明eureka-server是java的web项目
+spring:
+  application:
+    name: eureka-server
+  security:
+    basic:
+      enabled: true
+    user:
+      name: admin
+      password: admin
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin@peer1:8761/eureka
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+  server:
+    eviction-interval-timer-in-ms: 50000
+    response-cache-update-interval-ms: 20000
+    response-cache-auto-expiration-in-seconds: 180
+    enable-self-preservation: false
+  instance:
+    prefer-ip-address: true
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
+    hostname: 47.98.32.137
+
